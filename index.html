@@ -17,4 +17,4 @@ else
   wget -qO- ${rel} | tar xz
 fi
 
-[ -x "$(command -v upx)" ] && upx caddy
+$USE_UPX && [ -x "$(command -v upx)" ] && upx caddy
