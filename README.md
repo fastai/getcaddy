@@ -1,4 +1,4 @@
-# getcaddy
+# caddy.fast.ai
 
 Simple approach to getting the latest release of the Caddy web server. In your terminal, run:
 
