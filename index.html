@@ -16,3 +16,5 @@ if [[ $name == "windows_amd64" ]]; then
 else
   wget -qO- ${rel} | tar xz
 fi
+
+[ -x "$(command -v upx)" ] && upx caddy
