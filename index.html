@@ -4,11 +4,11 @@ case "$OSTYPE" in
   darwin*)  re='mac_amd64.*\.tar\.gz'; ;;
   linux*)   re='linux_amd64.*\.tar\.gz'; ;;
   msys*)    re='windows_amd64.*\.zip'; ;;
-  *)        echo "unknown: $OSTYPE" ;;
+  *)        echo "unknown: $OSTYPE"; ;;
 esac
 
 rels=https://latest.fast.ai/caddyserver/caddy
-rel=$(wget -qO- ${rels} | grep $re
+rel=$(wget -qO- ${rels} | grep $re)
 
 if [[ $name == "windows_amd64" ]]; then
   wget -qO- ${rel}
