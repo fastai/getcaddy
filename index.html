@@ -7,8 +7,7 @@ case "$OSTYPE" in
   *)        echo "unknown: $OSTYPE"; ;;
 esac
 
-rels=https://latest.fast.ai/caddyserver/caddy
-rel=$(wget -qO- ${rels} | grep $re)
+rel=$(wget -qO- https://latest.fast.ai/caddyserver/caddy | grep $re)
 
 if [[ $name == "windows_amd64" ]]; then
   wget -qO- ${rel}
