@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
 case "$OSTYPE" in
-  darwin*)  re='mac_amd64.*\.tar\.gz'; ;;
-  linux*)   re='linux_amd64.*\.tar\.gz'; ;;
-  msys*)    re='windows_amd64.*\.zip'; ;;
+  darwin*)  re='mac_amd64.*\.tar\.gz$'; ;;
+  linux*)   re='linux_amd64.*\.tar\.gz$'; ;;
+  msys*)    re='windows_amd64.*\.zip$'; ;;
   *)        echo "unknown: $OSTYPE"; ;;
 esac
 
