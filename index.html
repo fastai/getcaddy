@@ -1,17 +1,24 @@
 #!/usr/bin/env bash
 
-case "$OSTYPE" in
-  darwin*)  re='mac_amd64.*\.tar\.gz$'; ;;
-  linux*)   re='linux_amd64.*\.tar\.gz$'; ;;
-  msys*)    re='windows_amd64.*\.zip$'; ;;
-  *)        echo "unknown: $OSTYPE"; ;;
+arch=$(uname -m)
+case "$arch" in
+    x86_64)        arch="amd64" ;;
+    aarch64|arm64) arch="arm64" ;;
+    *)             echo "unsupported architecture: $arch"; exit 1 ;;
 esac
 
-rel=$(wget -qO- https://latest.fast.ai/latest/caddyserver/caddy | grep $re)
+case "$OSTYPE" in
+    darwin*)  re="mac_${arch}.*[.]tar[.]gz$" ;;
+    linux*)   re="linux_${arch}.*[.]tar[.]gz$" ;;
+    msys*)    re="windows_${arch}.*[.]zip$" ;;
+    *)        echo "unknown OS: $OSTYPE"; exit 1 ;;
+esac
 
-if [[ $name == "windows_amd64" ]]; then
-  wget -qO- ${rel}
-  unzip *.zip
+rel=$(wget -qO- https://latest.fast.ai/latest/caddyserver/caddy/$re)
+
+if [[ $OSTYPE == msys* ]]; then
+    wget -qO- ${rel}
+    unzip *.zip
 else
-  wget -qO- ${rel} | tar xz
+    wget -qO- ${rel} | tar xz
 fi
